@@ -11,10 +11,10 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-     - uses: actions/setup-java@v3
-       with:
-          distribution: 'temurin' # See 'Supported distributions' for available options
-          java-version: '17'
+      - uses: actions/setup-java@v3
+        with:
+          distribution: "temurin" # See 'Supported distributions' for available options
+          java-version: "17"
       - name: Cache Maven packages
         uses: actions/cache@v2
         with:
@@ -41,8 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: target/keycloak-mail-whitelisting-${{ github.event.release.tag_name }}.jar
           asset_name: keycloak-mail-whitelisting-${{ github.event.release.tag_name }}.jar
           asset_content_type: application/jar
-      
